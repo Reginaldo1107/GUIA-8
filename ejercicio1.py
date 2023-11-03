@@ -30,11 +30,12 @@ def existePalabra2_0(palabra : str , nombreArchivo : str) ->bool :
     archivo = open(nombreArchivo,"r")
     estaEnElArchivo :bool = False 
     for linea in archivo.readlines():
-        if palabra in linea :
+        if palabra in linea.split() :
             estaEnElArchivo = True
+    archivo.close()
             
     return estaEnElArchivo        
-print(existePalabra2_0("naldo","textoPrueba.txt"))
+print(existePalabra2_0("a","textoPrueba.txt"))
 
 
 #1.3 Una funcion cantidadAparaciones (in nombreArchivos : str , in palabra :str) -> int que devuelve la cantidad de apariciones de una palabra en un archivo de texto 

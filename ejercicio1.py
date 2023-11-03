@@ -35,7 +35,7 @@ def existePalabra2_0(palabra : str , nombreArchivo : str) ->bool :
     archivo.close()
             
     return estaEnElArchivo        
-print(existePalabra2_0("a","textoPrueba.txt"))
+#print(existePalabra2_0("u","textoPrueba.txt"))
 
 
 #1.3 Una funcion cantidadAparaciones (in nombreArchivos : str , in palabra :str) -> int que devuelve la cantidad de apariciones de una palabra en un archivo de texto 
@@ -46,16 +46,63 @@ def cantidadAparaciones (nombreArchivos : str , palabra :str ) -> int :
     conteoTotal :int = 0
     for linea in archivoLectura.readlines():
         conteoTotal+= linea.count(palabra)
-          
+    archivoLectura.close()          
     return conteoTotal    
 
-#print(cantidadAparaciones("textoPrueba.txt","naldo"))
+
+
+def cantidadAparaciones_2_0(nombreArchivos : str , palabra :str ) -> int :
+    archivoLectura = open(nombreArchivos,"r",encoding="utf8")
+    #listaDeFilas :list = []
+    conteoTotal :int = 0
+    for oracion in archivoLectura.readlines():
+        for palabraLista in oracion.split():
+            if(palabraLista == palabra):
+                conteoTotal+= 1
+    archivoLectura.close()      
+    return conteoTotal    
+
+#print(cantidadAparaciones_2_0("textoPrueba.txt","a"))
+
+# ejercicio 2   
+##########################################################################################################
+def es_comentario(texto:str) -> bool: 
+    for letras in texto : 
+        if letras != ' ' :
+            if letras == '#': 
+                return True
+            return False   
+    return False      
+
+def clonarcomentarios(nombre_archivo:str) -> None:  
+    archivo_imput = open(nombre_archivo,"r") 
+    archivo_ouput = open ("prueba2.txt","w" ) 
+    for texto in archivo_imput.readlines() : 
+        if not es_comentario(texto) : 
+            archivo_ouput.write(texto)
+
+    archivo_imput.close()
+    archivo_ouput.close()
+
+#clonarcomentarios("textoPrueba.txt")
+#############################
+
+
+####################
+#MI MODO , CON split()
+####################
+def clonar_sin_comentario(nombreArchibo : str )->None:
+    archivoLeer = open(nombreArchibo, "r")
+    archivoEscribir = open("naldoEscritura.txt","w")
+    for linea in archivoLeer.readlines():
+        reduccionLinea :str  = linea.lstrip()        
+        if(reduccionLinea[0] != "#"):
+            archivoEscribir.write(linea)
+    
+    archivoLeer.close()
+    archivoEscribir.close()
 
 
 
-
-
-
-
-
-
+clonar_sin_comentario("textoPrueba.txt")
+##########################################################################################################
